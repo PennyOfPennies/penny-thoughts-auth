@@ -4,14 +4,16 @@
 	"description": "Authorization lambda for Penny Thoughts",
 	"main": "dist/index.js",
 	"scripts": {
-		"build:action": "ncc build action/index.js -o action/build"
+		"build:action": "webpack --config webpack.config.cjs --mode production"
 	},
 	"devDependencies": {
 		"@actions/core": "^1.4.0",
 		"@actions/github": "^5.0.0",
 		"@types/node": "^16.3.3",
-		"@vercel/ncc": "^0.28.6",
-		"typescript": "^4.3.5"
+		"ts-loader": "^9.2.3",
+		"typescript": "^4.3.5",
+		"webpack": "^5.45.1",
+		"webpack-cli": "^4.7.2"
 	},
 	"author": "lividlair",
 	"license": "MIT"
