@@ -1,0 +1,18 @@
+{
+	"name": "penny-thoughts-auth",
+	"version": "1.0.0",
+	"description": "Authorization lambda for Penny Thoughts",
+	"main": "dist/index.js",
+	"scripts": {
+		"build:action": "ncc build action/index.js -o action/build"
+	},
+	"devDependencies": {
+		"@actions/core": "^1.4.0",
+		"@actions/github": "^5.0.0",
+		"@types/node": "^16.3.3",
+		"@vercel/ncc": "^0.28.6",
+		"typescript": "^4.3.5"
+	},
+	"author": "lividlair",
+	"license": "MIT"
+}
