@@ -6,6 +6,9 @@ inputs:
   GITHUB_TOKEN:
     description: 'GitHub token'
     required: true
+  TEST_SECRET:
+    description: 'A test secret'
+    required: true
 
 # outputs:
 #   SUCCESS:
