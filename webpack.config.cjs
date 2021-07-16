@@ -1,28 +1,25 @@
 const path = require('path');
 
-const ROOT = path.resolve( __dirname, 'action' );
 const DESTINATION = path.resolve( __dirname, 'action/build' );
 
 module.exports = () => {
 	return {
-		context: ROOT,
-		entry: './index.ts',
-		target: "node",
+		entry: './action/index.ts',
+		target: 'node',
 		output: {
 			filename: 'index.js',
 			path: DESTINATION
 		},
 		resolve: {
-			extensions: ['.ts', '.js'],
-			modules: [
-					ROOT,
-					'node_modules'
-			]
+			extensions: ['.ts', '.js']
 		},
 		module: {
 			rules: [
-				// all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-				{ test: /\.tsx?$/, loader: "ts-loader" }
+				{
+					test: /\.tsx?$/,
+					use: "ts-loader",
+					exclude: [/node_modules/],
+				},
 			]
 		},
 		mode: `production`,
