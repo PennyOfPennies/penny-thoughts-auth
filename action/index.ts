@@ -6,12 +6,9 @@ async function run() {
 	const TEST_SECRET = core.getInput("TEST_SECRET");
 	// const { context = {} } = github;
 	// const { pull_request } = context.payload;
-
-	// const exists = GITHUB_TOKEN ? "Token exists" : "Does not exist";
-	
-	// console.log("Hello, world!", exists, context);
-	console.log("A Test", "JUST_A_SECRET")
-	console.log("A Test", TEST_SECRET)
+	if (TEST_SECRET == "SUPER_DEV_SECRET") console.log("should be dev")
+	else console.log("should be production")
+	console.log("A Test", TEST_SECRET.split("_").join(" "))
 }
 
 run();
