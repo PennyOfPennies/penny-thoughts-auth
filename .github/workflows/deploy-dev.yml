@@ -11,7 +11,44 @@ jobs:
     environment: dev
     steps:
       - uses: actions/checkout@v2
+
+      - name: Cache node modules for action
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-action-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: cd action && npm install
+      - run: cd action && npm run build
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm install
+      - run: npm run build
+
+      - run: cd dist && find . -exec touch -t 202101250000 {} + && cd ..
+      - uses: montudor/action-zip@v1
+        with:
+          args: zip -rq -D -X -9 -A --compression-method deflate ./dist.zip ./dist
+
       - uses: ./
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          TEST_SECRET: ${{secrets.TEST_SECRET}}
+        env:
+          ENVIRONMENT: dev
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          REGION: us-east-2
+          ACCOUNT_NUMBER: "276401630934"

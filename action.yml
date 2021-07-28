@@ -6,15 +6,7 @@ inputs:
   GITHUB_TOKEN:
     description: 'GitHub token'
     required: true
-  TEST_SECRET:
-    description: 'A test secret'
-    required: true
 
-# outputs:
-#   SUCCESS:
-#     description: 'Whether or not the deployment was successful'
-#   MESSAGE:
-#       description: 'The message about whether it was successful or not'
 runs:
   using: 'node12'
   main: 'action/build/index.js'

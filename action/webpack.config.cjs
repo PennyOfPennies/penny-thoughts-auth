@@ -1,6 +1,6 @@
 const path = require('path');
 
-const DESTINATION = path.resolve( __dirname, 'dist' );
+const DESTINATION = path.resolve( __dirname, 'build' );
 
 module.exports = () => {
 	return {
@@ -8,8 +8,7 @@ module.exports = () => {
 		target: 'node',
 		output: {
 			filename: 'index.js',
-			path: DESTINATION,
-			libraryTarget: "commonjs"
+			path: DESTINATION
 		},
 		resolve: {
 			extensions: ['.ts', '.js']
@@ -23,7 +22,7 @@ module.exports = () => {
 				},
 			]
 		},
-		// mode: `production`,
+		mode: `production`,
 		optimization: {
 			minimize: true,
 		},
