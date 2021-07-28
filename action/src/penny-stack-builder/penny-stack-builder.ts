@@ -82,10 +82,10 @@ export class PennyStackBuilder {
 				apiKey: this.apiKey
 			})
 		})
-		console.debug("Stack response", response)
 
 		try {
 			const stackResponse: { stack: Stack } = await response.json()
+			console.debug("Stack response", stackResponse)
 			if (stackResponse.stack) {
 				this.stack = stackResponse.stack
 			}
