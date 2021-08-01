@@ -1,0 +1,22 @@
+{
+	"Divider": {
+		"prefix": "div",
+		"description": "visual divider for blocks of code",
+		"body": [
+			"/* ######################################### ${1:DIVIDER} ######################################### */"
+		]
+	},
+	"Try This": {
+		"prefix": "tryThis",
+		"description": "Penny Stack Builder's tryThis function snippet",
+		"body": [
+			"this.stackBuilder.tryThis<${1:void}>({",
+			"\terrorMessage: \"${2:message}\",",
+			"\terrorObject: { name${3} },",
+			"\tcallback: async () => {",
+			"\t\t${4:function}",
+			"\t}",
+			"})"
+		]
+	}
+}

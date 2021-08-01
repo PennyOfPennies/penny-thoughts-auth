@@ -4,3 +4,8 @@ action/build
 dist.zip
 .secrets
 scrap.ts
+.env
+.terraform
+
+terraform.tfstate
+terraform.tfstate.backup

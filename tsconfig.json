@@ -1,25 +1,27 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
-    "strict": true,
-    "moduleResolution": "node",
-    "outDir": "dist",
-    "noEmitOnError": true,
-    "sourceMap": true,
-    "allowJs": true,
-    "noImplicitAny": false,
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "es6",
+		"strict": true,
+		"strictNullChecks": true,
+		"moduleResolution": "node",
+		"outDir": "dist",
+		"noEmitOnError": true,
+		"inlineSourceMap": true,
+		"allowJs": true,
+		"noImplicitAny": false,
 		"isolatedModules": true,
-    "resolveJsonModule": true,
+		"resolveJsonModule": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
 		"checkJs": true,
-    "allowSyntheticDefaultImports": true,
-    "types": ["@types/node"],
-    "lib": ["es2020"],
-  },
-  "include": [
-    "src/**/*"
-  ]
+		"allowSyntheticDefaultImports": true,
+		"types": ["@types/node"],
+		"lib": ["es2020"],
+		"declaration": true
+	},
+	"include": [
+		"src/**/*"
+	]
 }

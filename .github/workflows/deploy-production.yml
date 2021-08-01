@@ -10,20 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Cache node modules for action
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-action-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - run: cd action && npm install
-      - run: cd action && npm run build
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -38,18 +26,45 @@ jobs:
       - run: npm install
       - run: npm run build
 
+      # Makes zip produce the same results every time.
       - run: cd dist && find . -exec touch -t 202101250000 {} + && cd ..
+
       - uses: montudor/action-zip@v1
         with:
           args: zip -rq -D -X -9 -A --compression-method deflate ./dist.zip ./dist
 
-      - uses: ./
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        working-directory: terraform/production
         with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        env:
-          ENVIRONMENT: dev
-          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-          REGION: us-east-2
-          ACCOUNT_NUMBER: "276401630934"
-        
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - name: Setup Terraform
+        working-directory: terraform/production
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Format
+        id: fmt
+        working-directory: terraform/production
+        run: terraform fmt -check -diff
+
+      - name: Terraform Init
+        id: init
+        working-directory: terraform/production
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        working-directory: terraform/production
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        working-directory: terraform/production
+        run: terraform plan -no-color
+
+      - name: Terraform Apply
+        working-directory: terraform/production
+        run: terraform apply -auto-approve

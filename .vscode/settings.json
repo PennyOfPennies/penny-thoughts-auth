@@ -1,0 +1,61 @@
+{
+	"settings.cycle": [
+		{
+			"id": "filesExclude",
+			"overrideWorkspaceSettings": true,
+			"setting": "files.exclude",
+			"values": [
+				{
+					"files.exclude": {
+						"**/.git": true,
+						"**/.svn": true,
+						"**/.hg": true,
+						"**/CVS": true,
+						"**/.DS_Store": true
+					}
+				},
+				{
+					"files.exclude": {
+						"**/.git": true,
+						"**/.svn": true,
+						"**/.hg": true,
+						"**/CVS": true,
+						"**/.DS_Store": true,
+						"**/node_modules": true,
+						"**/.eslintignore": true,
+						"**/.eslintrc.js": true,
+						"**/.gitignore": true,
+						"**/tsconfig.json": true,
+						"**/package.json": true,
+						"**/package-lock.json": true,
+						"**/npmrc": true,
+						"**/dist": true,
+						"**/build": true,
+						"**/webpack.config.cjs": true,
+						"**/dist.zip": true,
+						"**/.secrets": true,
+						"**/README.md": true,
+						"**/.terraform": true,
+						"**/.terraform.lock.hcl": true
+					}
+				}
+			]
+		}
+	],
+	"search.exclude": {
+		"**/node_modules": true,
+		"**/bower_components": true,
+		"**/*.code-search": true,
+		"**/dist": true,
+		"**/*.d.ts": true
+	},
+	"emeraldwalk.runonsave": {
+		"commands": [
+			{
+				"match": "\\.tf$",
+
+				"cmd": "cd ${fileDirname} && terraform fmt"
+			}
+		]
+	}
+}
