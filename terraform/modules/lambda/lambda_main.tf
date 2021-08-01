@@ -9,6 +9,13 @@ terraform {
   required_version = ">= 1.0.3"
 }
 
+data "archive_file" "init" {
+  type             = "zip"
+  source_dir       = var.build_path
+  output_file_mode = "0666" # Ensures the same, deterministic output regardless of platform
+  output_path      = var.zip_file_path
+}
+
 resource "aws_iam_role" "lambda_role" {
   name        = "${var.stack_name}_${var.lambda_name}_role"
   description = "Role assumed by the ${var.stack_name}_${var.lambda_name} lambda"

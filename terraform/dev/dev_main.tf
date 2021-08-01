@@ -22,9 +22,6 @@ provider "aws" {
 }
 
 module "authentication" {
-  source         = "../modules/authentication"
-  environment    = "_dev"
-  region         = "us-east-2"
-  account_number = "276401630934"
-  zip_file_path  = "../../dist.zip"
+  source      = "../common"
+  environment = "_dev"
 }

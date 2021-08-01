@@ -26,13 +26,6 @@ jobs:
       - run: npm install
       - run: npm run build
 
-      # Makes zip produce the same results every time.
-      - run: cd dist && find . -exec touch -t 202101250000 {} + && cd ..
-
-      - uses: montudor/action-zip@v1
-        with:
-          args: zip -rq -D -X -9 -A --compression-method deflate ./dist.zip ./dist
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:

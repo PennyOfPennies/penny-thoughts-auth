@@ -14,6 +14,7 @@ module "lambda" {
   stack_name         = "penny_thoughts_auth${var.environment}"
   lambda_name        = "authorize"
   lambda_description = "Lambda for authorizing requests for pennythoughts"
+  build_path         = var.build_path
   zip_file_path      = var.zip_file_path
   region             = var.region
   account_number     = var.account_number
